@@ -69,3 +69,7 @@ Detekt(Static Code Analysis)
         .\gradlew detekt
     Generate Default .yml file:
         .\gradlew detektGenerateConfig
+
+
+To run any Script file from shellConfiguration:
+    .\shellConfiguration\unit_ui_test.sh -- from directory containing gradlew

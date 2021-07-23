@@ -27,7 +27,6 @@ android {
     }
 
     buildFeatures.dataBinding = true
-    buildFeatures.viewBinding = true
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -91,11 +90,8 @@ dependencies {
     implementation(Libs.swiperefresh)
     implementation(Libs.AndroidX.constraintlayout)
 
-    implementation(Libs.AndroidX.Lifecycle.livedata)
-
     implementation(Libs.AndroidX.Navigation.fragmentKtx)
 
-    implementation(Libs.AndroidX.Fragment.fragment)
     implementation(Libs.AndroidX.Fragment.fragmentKtx)
 
     // Hilt

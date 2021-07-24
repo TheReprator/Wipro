@@ -73,3 +73,6 @@ Detekt(Static Code Analysis)
 
 To run any Script file from shellConfiguration:
     .\shellConfiguration\unit_ui_test.sh -- from directory containing gradlew
+
+To run any task:
+    gradle allDependencies

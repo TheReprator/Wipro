@@ -84,6 +84,9 @@ project.rootProject.allprojects {
     apply(plugin = "project-report")
 
     this.task("allDependencies", DependencyReportTask::class) {
+
+        outputFile = file("$rootDir/reports/dependencies.txt")
+
         evaluationDependsOnChildren()
         this.setRenderer(AsciiDependencyReportRenderer())
     }

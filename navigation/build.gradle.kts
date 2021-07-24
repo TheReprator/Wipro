@@ -63,8 +63,6 @@ dependencies {
     implementation(Libs.AndroidX.appcompat)
     implementation(Libs.AndroidX.coreKtx)
 
-    implementation(Libs.AndroidX.Navigation.fragment)
     implementation(Libs.AndroidX.Navigation.fragmentKtx)
     implementation(Libs.AndroidX.Navigation.uiKtx)
-    implementation(Libs.AndroidX.Navigation.ui)
 }

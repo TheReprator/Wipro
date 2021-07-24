@@ -31,7 +31,7 @@ object AppModules {
 object Libs {
 
     object Versions{
-        const val kotlin = "1.5.10"
+        const val kotlin = "1.5.20"
         const val spotless = "5.14.0"
         const val dokka = "1.4.32"
         const val ktlint = "0.40.0"
@@ -86,7 +86,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val kotlinVersion = "1.5.10"
+        private const val kotlinVersion = "1.5.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -121,21 +121,13 @@ object Libs {
 
         object Lifecycle {
             private const val version = "2.3.1"
-            const val commonJava = "androidx.lifecycle:lifecycle-common-java8:$version"
             const val extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
-            const val runtime = "androidx.lifecycle:lifecycle-runtime:$version"
-            const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
-            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
 
         object Navigation {
             private const val version = "2.3.5"
-            const val runtime = "androidx.navigation:navigation-runtime:$version"
-            const val runtimeKtx = "androidx.navigation:navigation-runtime-ktx:$version"
-            const val fragment = "androidx.navigation:navigation-fragment:$version"
             const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
-            const val ui = "androidx.navigation:navigation-ui:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
             const val navigationPlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
@@ -181,7 +173,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.34"
+        private const val version = "2.38"
         const val runtime = "com.google.dagger:dagger:$version"
         const val android = "com.google.dagger:dagger-android:$version"
         const val android_support = "com.google.dagger:dagger-android-support:$version"
@@ -191,16 +183,12 @@ object Libs {
     }
 
     object DaggerHilt {
-        private const val version = "2.36"
+        private const val version = "2.38"
         private const val androidXversion = "1.0.0"
 
         const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompilerAndroid = "com.google.dagger:hilt-android-compiler:$version"
-        const val hiltCompiler = "androidx.hilt:hilt-compiler:$androidXversion"
-        const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:$androidXversion"
-        const val work = "androidx.hilt:hilt-work:$androidXversion"
-
         const val hiltAndroidTest = "com.google.dagger:hilt-android-testing:$version"
     }
 

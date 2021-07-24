@@ -11,7 +11,12 @@ To Generate Dependency for all modules:
     .\gradlew allDependencies
 
 To Generate Dependency for all modules in a txt file:
-    .\gradlew allDependencies > output.txt
+    To generate in root directory
+        .\gradlew allDependencies > output.txt or
+         gradlew allDependencies > output.txt
+
+    To generate in specific directory:
+        gradlew allDependencies > reports\output.txt
 
 
 Dokka Command(Document Generation):
@@ -75,4 +80,4 @@ To run any Script file from shellConfiguration:
     .\shellConfiguration\unit_ui_test.sh -- from directory containing gradlew
 
 To run any task:
-    gradle allDependencies
+    gradle taskName

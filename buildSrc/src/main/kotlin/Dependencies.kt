@@ -56,7 +56,7 @@ object Libs {
     }
 
     const val inject = "javax.inject:javax.inject:1"
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.1"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val facebook = "com.facebook.android:facebook-login:6.1.0"
     const val countryPicker = "com.hbb20:ccp:2.3.8"

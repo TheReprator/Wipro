@@ -16,27 +16,44 @@
 
 package reprator.wipro.factlist.di
 
+import android.util.Log
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.MockWebServer
+import okhttp3.logging.HttpLoggingInterceptor
+import reprator.wipro.factlist.CustomMockServer
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.util.concurrent.TimeUnit
 
+private const val TIMEOUT = 20L
 @Module
 @InstallIn(SingletonComponent::class)
 class TestFactListModule {
 
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val httpLoggingInterceptor = HttpLoggingInterceptor { message ->
+            Log.e("Vikramttt", ":$message")
+        }
+
+        return httpLoggingInterceptor.apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
 
@@ -51,18 +68,12 @@ class TestFactListModule {
     @Provides
     fun provideRetrofit(
         converterFactory: JacksonConverterFactory,
-        okHttpClient: OkHttpClient,
-        mockWebServer: MockWebServer
+        okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(mockWebServer.url("/"))
+            .baseUrl(CustomMockServer.httpUrl)
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
-    }
-
-    @Provides
-    fun provideMockWebServer(): MockWebServer {
-        return MockWebServer()
     }
 }

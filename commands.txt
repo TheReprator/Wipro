@@ -4,6 +4,21 @@ To list all available tasks:
 	c) ./gradlew tasks
 	d) .\gradlew tasks
 
+To generate apk:
+    gradlew --stacktrace assembleDebug
+
+To Generate Dependency for all modules:
+    .\gradlew allDependencies
+
+To Generate Dependency for all modules in a txt file:
+    To generate in root directory
+        .\gradlew allDependencies > output.txt or
+         gradlew allDependencies > output.txt
+
+    To generate in specific directory:
+        gradlew allDependencies > reports\output.txt
+
+
 Dokka Command(Document Generation):
 	    dokkaGfm - Generates documentation in GitHub flavored markdown format
 	    dokkaGfmCollector - Generates documentation merging all subprojects 'dokkaGfm' tasks into one virtual module
@@ -59,3 +74,10 @@ Detekt(Static Code Analysis)
         .\gradlew detekt
     Generate Default .yml file:
         .\gradlew detektGenerateConfig
+
+
+To run any Script file from shellConfiguration:
+    .\shellConfiguration\unit_ui_test.sh -- from directory containing gradlew
+
+To run any task:
+    gradle taskName

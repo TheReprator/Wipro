@@ -26,12 +26,14 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import reprator.wipro.factlist.CustomMockServer
 import reprator.wipro.factlist.Factlist
 import reprator.wipro.factlist.dispatcherWithCustomBody
 import reprator.wipro.factlist.dispatcherWithEmptyBody
 import reprator.wipro.factlist.dispatcherWithErrorTimeOut
 import reprator.wipro.factlist.screen.FactListKaspressoScreen
 import reprator.wipro.factlist.util.launchFragmentInHiltContainer
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltAndroidTest
@@ -45,17 +47,16 @@ class FactListKaspressoTest : TestCase() {
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    @Inject
-    lateinit var mockWebServer: MockWebServer
+    private lateinit var mockWebServer: MockWebServer
 
     @Inject
     lateinit var okHttp3IdlingResource: OkHttp3IdlingResource
 
     @Before
     fun setUp() {
-        hiltRule.inject()
+        mockWebServer = CustomMockServer().mockWebServer
 
-        mockWebServer.start()
+        hiltRule.inject()
 
         IdlingRegistry.getInstance().register(okHttp3IdlingResource)
 
@@ -87,35 +88,37 @@ class FactListKaspressoTest : TestCase() {
                         hasTitle(SCREEN_TITLE)
                     }
 
-                    factList {
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        factList {
 
-                        hasSize(TOTAL_ITEM)
+                            hasSize(TOTAL_ITEM)
 
-                        firstChild<FactListKaspressoScreen.Item> {
-                            title {
-                                isVisible()
-                                hasText("A")
+                            firstChild<FactListKaspressoScreen.Item> {
+                                title {
+                                    isVisible()
+                                    hasText("A")
+                                }
+                                description {
+                                    isDisplayed()
+                                    hasText("First Item Description")
+                                }
+                                image {
+                                    isDisplayed()
+                                }
                             }
-                            description {
-                                isDisplayed()
-                                hasText("First Item Description")
-                            }
-                            image {
-                                isDisplayed()
-                            }
-                        }
 
-                        scrollToEnd()
+                            scrollToEnd()
 
-                        lastChild<FactListKaspressoScreen.Item> {
-                            title {
-                                hasText("Last Item")
-                            }
-                            description {
-                                hasText("Last Description")
-                            }
-                            image {
-                                isDisplayed()
+                            lastChild<FactListKaspressoScreen.Item> {
+                                title {
+                                    hasText("Last Item")
+                                }
+                                description {
+                                    hasText("Last Description")
+                                }
+                                image {
+                                    isDisplayed()
+                                }
                             }
                         }
                     }
@@ -134,13 +137,15 @@ class FactListKaspressoTest : TestCase() {
 
                 FactListKaspressoScreen {
 
-                    factList.hasSize(TOTAL_ITEM)
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        factList.hasSize(TOTAL_ITEM)
 
-                    mockWebServer.dispatcher = dispatcherWithErrorTimeOut()
+                        mockWebServer.dispatcher = dispatcherWithErrorTimeOut()
 
-                    swipeToRefresh {
-                        isDisplayed()
-                        swipeDown()
+                        swipeToRefresh {
+                            isDisplayed()
+                            swipeDown()
+                        }
                     }
                 }
             }
@@ -148,9 +153,11 @@ class FactListKaspressoTest : TestCase() {
             step("2. verify error with snackbar") {
 
                 FactListKaspressoScreen {
-                    snackbar {
-                        isDisplayed()
-                        text.hasText("timeout")
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        snackbar {
+                            isDisplayed()
+                            text.hasText("timeout")
+                        }
                     }
                 }
             }
@@ -172,9 +179,11 @@ class FactListKaspressoTest : TestCase() {
 
                     mockWebServer.dispatcher = dispatcherWithCustomBody()
 
-                    errorRetry {
-                        isDisplayed()
-                        click()
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        errorRetry {
+                            isDisplayed()
+                            click()
+                        }
                     }
                 }
             }
@@ -201,10 +210,11 @@ class FactListKaspressoTest : TestCase() {
             step("show empty view") {
 
                 FactListKaspressoScreen {
-
-                    factList.isNotDisplayed()
-                    empty {
-                        isDisplayed()
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        factList.isNotDisplayed()
+                        empty {
+                            isDisplayed()
+                        }
                     }
                 }
             }
@@ -221,20 +231,21 @@ class FactListKaspressoTest : TestCase() {
                 testLogger.i("Main section")
 
                 FactListKaspressoScreen {
+                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(10)) {
+                        factList {
 
-                    factList {
+                            scrollTo(7)
+                            childAt<FactListKaspressoScreen.Item>(7) {
 
-                        scrollTo(7)
-                        childAt<FactListKaspressoScreen.Item>(7) {
-
-                            title {
-                                hasEmptyText()
-                            }
-                            description {
-                                hasEmptyText()
-                            }
-                            image {
-                                isDisplayed()
+                                title {
+                                    hasEmptyText()
+                                }
+                                description {
+                                    hasEmptyText()
+                                }
+                                image {
+                                    isDisplayed()
+                                }
                             }
                         }
                     }

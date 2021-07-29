@@ -16,14 +16,18 @@
 
 package reprator.wipro.factlist
 
-import android.app.Application
-import android.content.Context
-import androidx.test.runner.AndroidJUnitRunner
-import dagger.hilt.android.testing.HiltTestApplication
+import okhttp3.HttpUrl
+import okhttp3.mockwebserver.MockWebServer
 
-class FactListTestRunner : AndroidJUnitRunner() {
+class CustomMockServer {
 
-    override fun newApplication(cl: ClassLoader?, name: String?, context: Context?): Application {
-        return super.newApplication(cl, HiltTestApplication::class.java.name, context)
+    companion object {
+        lateinit var httpUrl: HttpUrl
+    }
+    val mockWebServer = MockWebServer()
+
+    init {
+        mockWebServer.start()
+        httpUrl = mockWebServer.url("/")
     }
 }

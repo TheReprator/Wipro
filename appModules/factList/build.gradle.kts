@@ -7,6 +7,22 @@ plugins {
     id(Libs.TestDependencies.Junit5.plugin)
 }
 
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+
+    javacOptions {
+        // These options are normally set automatically via the Hilt Gradle plugin, but we
+        // set them manually to workaround a bug in the Kotlin 1.5.20
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+
+    arguments {
+        arg("dagger.hilt.shareTestComponents", "true")
+    }
+}
+
 android {
     compileSdkVersion(AndroidSdk.compile)
 
@@ -25,7 +41,6 @@ android {
     }
 
     buildFeatures.dataBinding = true
-    buildFeatures.viewBinding = true
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -89,11 +104,8 @@ dependencies {
     implementation(Libs.swiperefresh)
     implementation(Libs.AndroidX.constraintlayout)
 
-    implementation(Libs.AndroidX.Lifecycle.livedata)
-
     implementation(Libs.AndroidX.Navigation.fragmentKtx)
 
-    implementation(Libs.AndroidX.Fragment.fragment)
     implementation(Libs.AndroidX.Fragment.fragmentKtx)
 
     // Hilt
@@ -136,6 +148,7 @@ dependencies {
     androidTestImplementation(Libs.TestDependencies.UITest.kaspresso)
 
     androidTestImplementation(Libs.OkHttp.mockWebServer)
+    androidTestImplementation(Libs.OkHttp.loggingInterceptor)
 
     // OkHttp Idling Resource
     androidTestImplementation(Libs.TestDependencies.UITest.okhttpIdlingResource)

@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wipro">
         <activity
-            android:exported="false"
             android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

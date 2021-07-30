@@ -26,13 +26,6 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 subprojects {
 
     plugins.apply(Libs.Plugins.detekt)

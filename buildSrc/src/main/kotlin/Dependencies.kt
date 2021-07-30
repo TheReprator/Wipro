@@ -31,7 +31,7 @@ object AppModules {
 object Libs {
 
     object Versions{
-        const val kotlin = "1.5.20"
+        const val kotlin = "1.5.21"
         const val spotless = "5.14.0"
         const val dokka = "1.4.32"
         const val ktlint = "0.40.0"
@@ -56,7 +56,7 @@ object Libs {
     }
 
     const val inject = "javax.inject:javax.inject:1"
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.2"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val facebook = "com.facebook.android:facebook-login:6.1.0"
     const val countryPicker = "com.hbb20:ccp:2.3.8"
@@ -86,11 +86,10 @@ object Libs {
     }
 
     object Kotlin {
-        private const val kotlinVersion = "1.5.20"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"
     }
 
     object Coroutines {
@@ -173,7 +172,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.38"
+        private const val version = "2.38.1"
         const val runtime = "com.google.dagger:dagger:$version"
         const val android = "com.google.dagger:dagger-android:$version"
         const val android_support = "com.google.dagger:dagger-android-support:$version"
@@ -183,7 +182,7 @@ object Libs {
     }
 
     object DaggerHilt {
-        private const val version = "2.38"
+        private const val version = "2.38.1"
         private const val androidXversion = "1.0.0"
 
         const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"

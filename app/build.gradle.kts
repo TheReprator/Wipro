@@ -87,10 +87,3 @@ dependencies {
     implementation(Libs.DaggerHilt.hilt)
     kapt(Libs.DaggerHilt.hiltCompilerAndroid)
 }
-
-configurations {
-    testImplementation {
-        exclude("junit", "junit")
-        exclude("androidx.test.ext", "junit")
-    }
-}

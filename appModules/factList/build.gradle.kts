@@ -104,6 +104,7 @@ dependencies {
     /*
     *  Unit Testing
     * */
+    testImplementation(Libs.TestDependencies.Junit5.platform)
     testImplementation(Libs.TestDependencies.Junit5.jupiter)
     testRuntimeOnly(Libs.TestDependencies.Junit5.runtime)
 
@@ -145,4 +146,8 @@ dependencies {
     androidTestImplementation(Libs.Coroutines.coroutineTest) {
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-debug")
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

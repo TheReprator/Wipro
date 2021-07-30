@@ -203,6 +203,7 @@ object Libs {
             // (Required) Writing and executing Unit Tests on the JUnit Platform
             const val jupiter = "org.junit.jupiter:junit-jupiter-api:$version"
             const val runtime = "org.junit.jupiter:junit-jupiter-engine:$version"
+            const val platform = "org.junit.platform:junit-platform-runner:1.7.2"
 
             // (Optional) If you need "Parameterized Tests"
             const val parameterized = "org.junit.jupiter:junit-jupiter-params:$version"

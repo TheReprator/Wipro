@@ -26,12 +26,12 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.TestFakeData.getFakeRemoteDataList
 
-@RunWith(JUnit4::class)
+@RunWith(JUnitPlatform::class)
 class FactListMapperTest {
 
     @Rule

@@ -11,10 +11,10 @@ kapt {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
-        minSdkVersion(AndroidSdk.min)
+        minSdk = AndroidSdk.min
 
         testInstrumentationRunner = Libs.TestDependencies.testRunner
 
@@ -53,7 +53,7 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/*")
+        jniLibs.excludes.add("META-INF/*")
     }
 }
 

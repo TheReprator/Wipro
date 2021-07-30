@@ -3,7 +3,9 @@ object AndroidSdk {
     const val compile = 30
     const val target = compile
 
-    val locales = listOf("en", "hi")
+    val localesEnglish = "en"
+    val localesHindi = "hi"
+    //val locales = listOf("en", "hi")
 }
 
 object AppConstant {

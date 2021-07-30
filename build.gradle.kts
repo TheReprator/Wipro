@@ -72,7 +72,7 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().configureEach 
     outputDirectory.set(file("$rootDir/reports/dokka"))
 }
 
-//apply(from = file("$rootDir/gradle/dependencyGraph.gradle"))
+apply(from = file("$rootDir/gradle/dependencyGraph.gradle"))
 
 project.rootProject.allprojects {
     apply(plugin = "project-report")

@@ -12,13 +12,13 @@ kapt {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    compileSdk =AndroidSdk.compile
 
     defaultConfig {
         applicationId = AppConstant.applicationPackage
 
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        minSdk =AndroidSdk.min
+        targetSdk =AndroidSdk.target
 
         versionCode = AppVersion.versionCode
         versionName = AppVersion.versionName
@@ -27,7 +27,7 @@ android {
 
         multiDexEnabled = true
 
-        resConfigs(AndroidSdk.locales)
+        resourceConfigurations.add(AndroidSdk.localesEnglish)
 
         buildConfigField("String", AppConstant.hostConstant, "\"${AppConstant.host}\"")
     }
@@ -40,7 +40,7 @@ android {
         }
     }
 
-    flavorDimensions(AppConstant.flavourDimension)
+    flavorDimensions.add(AppConstant.flavourDimension)
 
     buildFeatures.viewBinding = true
     buildFeatures.dataBinding = true
@@ -86,8 +86,11 @@ dependencies {
 
     implementation(Libs.DaggerHilt.hilt)
     kapt(Libs.DaggerHilt.hiltCompilerAndroid)
+}
 
-    implementation(Libs.AndroidX.Room.runtime)
-    implementation(Libs.AndroidX.Room.ktx)
-    kapt(Libs.AndroidX.Room.compiler)
+configurations {
+    testImplementation {
+        exclude("junit", "junit")
+        exclude("androidx.test.ext", "junit")
+    }
 }

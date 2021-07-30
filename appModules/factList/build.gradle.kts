@@ -13,11 +13,11 @@ kapt {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
 
         multiDexEnabled = true
 
@@ -25,7 +25,7 @@ android {
             file("proguard-rules.pro")
         )
 
-        resConfigs(AndroidSdk.locales)
+        resourceConfigurations.add(AndroidSdk.localesEnglish)
         testInstrumentationRunner = "reprator.wipro.factlist.FactListTestRunner"
     }
 
@@ -56,8 +56,8 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/atomicfu.kotlin_module")
-        exclude("META-INF/*")
+        jniLibs.excludes.add("META-INF/atomicfu.kotlin_module")
+        jniLibs.excludes.add("META-INF/*")
     }
 
     testOptions {

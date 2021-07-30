@@ -30,8 +30,8 @@ object AppModules {
 
 object Libs {
 
-    object Versions {
-        const val kotlin = "1.5.10"
+    object Versions{
+        const val kotlin = "1.5.21"
         const val spotless = "5.14.0"
         const val dokka = "1.4.32"
         const val ktlint = "0.40.0"
@@ -86,11 +86,10 @@ object Libs {
     }
 
     object Kotlin {
-        private const val kotlinVersion = "1.5.10"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"
     }
 
     object Coroutines {
@@ -173,7 +172,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.38"
+        private const val version = "2.38.1"
         const val runtime = "com.google.dagger:dagger:$version"
         const val android = "com.google.dagger:dagger-android:$version"
         const val android_support = "com.google.dagger:dagger-android-support:$version"
@@ -183,7 +182,7 @@ object Libs {
     }
 
     object DaggerHilt {
-        private const val version = "2.38"
+        private const val version = "2.38.1"
         private const val androidXversion = "1.0.0"
 
         const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"
@@ -249,6 +248,7 @@ object Libs {
             const val fragmentTesting = "androidx.fragment:fragment-testing:1.3.4"
             const val okhttpIdlingResource = "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
             const val dexmaker = "com.linkedin.dexmaker:dexmaker:2.28.1"
+
         }
     }
 }

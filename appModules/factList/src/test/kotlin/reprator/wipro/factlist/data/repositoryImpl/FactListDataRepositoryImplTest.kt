@@ -16,39 +16,32 @@
 
 package reprator.wipro.factlist.data.repositoryImpl
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifySequence
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.RegisterExtension
 import reprator.wipro.base.useCases.AppError
 import reprator.wipro.base.useCases.AppSuccess
 import reprator.wipro.base.util.interent.ConnectionDetector
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.data.datasource.FactListRemoteDataSource
 import reprator.wipro.factlist.domain.repository.FactListRepository
+import reprator.wipro.factlist.util.InstantExecutorExtension
 import reprator.wipro.factlist.util.MainCoroutineRule
 
-@ExperimentalCoroutinesApi
-@RunWith(JUnit4::class)
+@ExtendWith(value = [InstantExecutorExtension::class])
 class FactListDataRepositoryImplTest {
 
-    @Rule
     @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
-    @JvmField
-    @Rule
+    @RegisterExtension
     val coroutinesTestRule = MainCoroutineRule()
 
     @MockK
@@ -59,7 +52,7 @@ class FactListDataRepositoryImplTest {
 
     lateinit var factListRepository: FactListRepository
 
-    @Before
+    @BeforeEach
     fun setup() {
         MockKAnnotations.init(this, true)
 

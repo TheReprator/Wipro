@@ -16,28 +16,26 @@
 
 package reprator.wipro.factlist.datasource.remote
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.Rule
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.extension.ExtendWith
 import reprator.wipro.base.util.network.bodyOrThrow
 import reprator.wipro.factlist.dispatcherWithCustomBody
 import reprator.wipro.factlist.dispatcherWithErrorTimeOut
+import reprator.wipro.factlist.util.InstantExecutorExtension
 import retrofit2.Retrofit
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
 @ExperimentalCoroutinesApi
-@RunWith(JUnit4::class)
+@ExtendWith(value = [InstantExecutorExtension::class])
 class FactListApiServiceTest {
 
     companion object {
@@ -49,10 +47,6 @@ class FactListApiServiceTest {
             "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/220px-American_Beaver.jpg"
         private const val REQUEST_PATH = "/2iodh4vg0eortkl/facts.json"
     }
-
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var service: FactListApiService
 

@@ -27,7 +27,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.junit.jupiter.api.extension.RegisterExtension
 import reprator.wipro.base.useCases.AppError
 import reprator.wipro.base.useCases.AppSuccess
 import reprator.wipro.base.util.interent.ConnectionDetector
@@ -35,14 +34,9 @@ import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.data.datasource.FactListRemoteDataSource
 import reprator.wipro.factlist.domain.repository.FactListRepository
 import reprator.wipro.factlist.util.InstantExecutorExtension
-import reprator.wipro.factlist.util.MainCoroutineRule
 
 @ExtendWith(value = [InstantExecutorExtension::class])
 class FactListDataRepositoryImplTest {
-
-    @JvmField
-    @RegisterExtension
-    val coroutinesTestRule = MainCoroutineRule()
 
     @MockK
     lateinit var factListRemoteDataSource: FactListRemoteDataSource
@@ -62,48 +56,46 @@ class FactListDataRepositoryImplTest {
     }
 
     @Test
-    fun `get fact list from server, on internet connection available`() =
-        coroutinesTestRule.runBlockingTest {
+    fun `get fact list from server, on internet connection available`() = runBlockingTest {
 
-            val output = getFakeManipulatedRemoteDataList()
+        val output = getFakeManipulatedRemoteDataList()
 
-            coEvery {
-                connectionDetector.isInternetAvailable
-            } returns true
+        coEvery {
+            connectionDetector.isInternetAvailable
+        } returns true
 
-            coEvery {
-                factListRemoteDataSource.getFacListRemoteDataSource()
-            } returns AppSuccess(output)
+        coEvery {
+            factListRemoteDataSource.getFacListRemoteDataSource()
+        } returns AppSuccess(output)
 
-            val result = factListRepository.getFactListRepository().single()
+        val result = factListRepository.getFactListRepository().single()
 
-            Truth.assertThat(result).isInstanceOf(AppSuccess::class.java)
-            Truth.assertThat(result.get()!!.second).hasSize(output.second.size)
+        Truth.assertThat(result).isInstanceOf(AppSuccess::class.java)
+        Truth.assertThat(result.get()!!.second).hasSize(output.second.size)
 
-            coVerifySequence {
-                connectionDetector.isInternetAvailable
-                factListRemoteDataSource.getFacListRemoteDataSource()
-            }
-
-            coVerify(atMost = 1) {
-                connectionDetector.isInternetAvailable
-                factListRemoteDataSource.getFacListRemoteDataSource()
-            }
+        coVerifySequence {
+            connectionDetector.isInternetAvailable
+            factListRemoteDataSource.getFacListRemoteDataSource()
         }
+
+        coVerify(atMost = 1) {
+            connectionDetector.isInternetAvailable
+            factListRemoteDataSource.getFacListRemoteDataSource()
+        }
+    }
 
     @Test
-    fun `No internet available`() =
-        coroutinesTestRule.runBlockingTest {
+    fun `No internet available`() = runBlockingTest {
 
-            val output = "No internet connection detected."
+        val output = "No internet connection detected."
 
-            coEvery {
-                connectionDetector.isInternetAvailable
-            } returns false
+        coEvery {
+            connectionDetector.isInternetAvailable
+        } returns false
 
-            val result = factListRepository.getFactListRepository().single()
+        val result = factListRepository.getFactListRepository().single()
 
-            Truth.assertThat(result).isInstanceOf(AppError::class.java)
-            Truth.assertThat((result as AppError).message).isEqualTo(output)
-        }
+        Truth.assertThat(result).isInstanceOf(AppError::class.java)
+        Truth.assertThat((result as AppError).message).isEqualTo(output)
+    }
 }

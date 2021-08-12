@@ -16,7 +16,6 @@
 
 package reprator.wipro.factlist
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.platform.suite.api.SelectClasses
 import org.junit.runner.RunWith
@@ -26,7 +25,6 @@ import reprator.wipro.factlist.datasource.remote.FactListRemoteDataSourceImplTes
 import reprator.wipro.factlist.datasource.remote.remotemapper.FactListMapperTest
 import reprator.wipro.factlist.domain.usecase.FactListUseCaseTest
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(JUnitPlatform::class)
 @SelectClasses(
     FactListDataRepositoryImplTest::class,

@@ -29,11 +29,13 @@ import reprator.wipro.base.util.network.bodyOrThrow
 import reprator.wipro.factlist.dispatcherWithCustomBody
 import reprator.wipro.factlist.dispatcherWithErrorTimeOut
 import reprator.wipro.factlist.util.InstantExecutorExtension
+import reprator.wipro.factlist.util.TimberExtension
 import retrofit2.Retrofit
+import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
-@ExtendWith(value = [InstantExecutorExtension::class])
+@ExtendWith(value = [InstantExecutorExtension::class, TimberExtension::class])
 class FactListApiServiceTest {
 
     companion object {
@@ -85,6 +87,7 @@ class FactListApiServiceTest {
         val title = factListEntity!!.title
         Truth.assertThat(title).isEqualTo(TITLE)
 
+        Timber.e("1")
         val factList = factListEntity.rows
         Truth.assertThat(factList.size).isEqualTo(COUNT)
 
@@ -92,6 +95,7 @@ class FactListApiServiceTest {
         Truth.assertThat(factListItem.title).isEqualTo(ITEM_TITLE)
         Truth.assertThat(factListItem.description).isEqualTo(ITEM_DESCRIPTION)
         Truth.assertThat(factListItem.imageHref).isEqualTo(ITEM_URL)
+        Timber.e("11")
     }
 
     @Test

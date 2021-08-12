@@ -25,7 +25,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import reprator.wipro.factlist.HiltTestActivity
 import reprator.wipro.factlist.R
 
@@ -37,7 +36,6 @@ import reprator.wipro.factlist.R
 const val THEME_EXTRAS_BUNDLE_KEY =
     "androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY"
 
-@ExperimentalCoroutinesApi
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,
     @StyleRes themeResId: Int = R.style.FragmentScenarioEmptyFragmentActivityTheme,

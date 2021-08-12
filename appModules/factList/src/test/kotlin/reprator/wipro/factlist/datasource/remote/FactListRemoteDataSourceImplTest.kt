@@ -22,7 +22,6 @@ import io.mockk.coEvery
 import io.mockk.coVerifySequence
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -41,7 +40,6 @@ import reprator.wipro.factlist.util.MainCoroutineRule
 import retrofit2.HttpException
 import retrofit2.Response
 
-@ExperimentalCoroutinesApi
 @ExtendWith(value = [InstantExecutorExtension::class])
 class FactListRemoteDataSourceImplTest {
 

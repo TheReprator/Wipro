@@ -17,7 +17,6 @@
 package reprator.wipro.factlist.datasource.remote
 
 import com.google.common.truth.Truth
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
@@ -34,7 +33,6 @@ import retrofit2.Retrofit
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
-@ExperimentalCoroutinesApi
 @ExtendWith(value = [InstantExecutorExtension::class])
 class FactListApiServiceTest {
 

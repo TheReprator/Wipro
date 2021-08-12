@@ -85,3 +85,7 @@ project.rootProject.allprojects {
         this.setRenderer(AsciiDependencyReportRenderer())
     }
 }
+
+kotlin.sourceSets.all {
+    languageSettings.useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+}

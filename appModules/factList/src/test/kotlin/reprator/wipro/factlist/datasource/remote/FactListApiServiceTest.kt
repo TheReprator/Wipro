@@ -16,25 +16,26 @@
 
 package reprator.wipro.factlist.datasource.remote
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.extension.ExtendWith
 import reprator.wipro.base.util.network.bodyOrThrow
 import reprator.wipro.factlist.dispatcherWithCustomBody
 import reprator.wipro.factlist.dispatcherWithErrorTimeOut
+import reprator.wipro.factlist.util.InstantExecutorExtension
+import reprator.wipro.factlist.util.TimberExtension
 import retrofit2.Retrofit
+import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
-@RunWith(JUnit4::class)
+@ExtendWith(value = [InstantExecutorExtension::class, TimberExtension::class])
 class FactListApiServiceTest {
 
     companion object {
@@ -47,15 +48,11 @@ class FactListApiServiceTest {
         private const val REQUEST_PATH = "/2iodh4vg0eortkl/facts.json"
     }
 
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
     private lateinit var service: FactListApiService
 
     private lateinit var mockWebServer: MockWebServer
 
-    @Before
+    @BeforeEach
     fun createService() {
         mockWebServer = MockWebServer()
 
@@ -73,7 +70,7 @@ class FactListApiServiceTest {
             .create(FactListApiService::class.java)
     }
 
-    @After
+    @AfterEach
     fun stopService() {
         mockWebServer.shutdown()
     }
@@ -90,6 +87,7 @@ class FactListApiServiceTest {
         val title = factListEntity!!.title
         Truth.assertThat(title).isEqualTo(TITLE)
 
+        Timber.e("1")
         val factList = factListEntity.rows
         Truth.assertThat(factList.size).isEqualTo(COUNT)
 
@@ -97,6 +95,7 @@ class FactListApiServiceTest {
         Truth.assertThat(factListItem.title).isEqualTo(ITEM_TITLE)
         Truth.assertThat(factListItem.description).isEqualTo(ITEM_DESCRIPTION)
         Truth.assertThat(factListItem.imageHref).isEqualTo(ITEM_URL)
+        Timber.e("11")
     }
 
     @Test
@@ -118,10 +117,12 @@ class FactListApiServiceTest {
         Truth.assertThat(request.method).isEqualTo("GET")
     }
 
-    @Test(expected = SocketTimeoutException::class)
+    @Test
     fun `Timeout example`(): Unit = runBlocking {
         mockWebServer.dispatcher = dispatcherWithErrorTimeOut()
 
-        service.factList().bodyOrThrow()
+        assertThrows<SocketTimeoutException> {
+            service.factList().bodyOrThrow()
+        }
     }
 }

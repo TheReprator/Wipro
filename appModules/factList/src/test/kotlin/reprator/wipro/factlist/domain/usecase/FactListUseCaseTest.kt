@@ -16,44 +16,31 @@
 
 package reprator.wipro.factlist.domain.usecase
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import reprator.wipro.base.useCases.AppError
 import reprator.wipro.base.useCases.AppSuccess
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.domain.repository.FactListRepository
-import reprator.wipro.factlist.util.MainCoroutineRule
+import reprator.wipro.factlist.util.InstantExecutorExtension
 
-@ExperimentalCoroutinesApi
-@RunWith(JUnit4::class)
+@ExtendWith(value = [InstantExecutorExtension::class])
 class FactListUseCaseTest {
-
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
-    @JvmField
-    @Rule
-    val coroutinesTestRule = MainCoroutineRule()
 
     @MockK
     lateinit var factListRepository: FactListRepository
 
     lateinit var factListUseCase: FactListUseCase
 
-    @Before
+    @BeforeEach
     fun setup() {
         MockKAnnotations.init(this, true)
 
@@ -61,7 +48,7 @@ class FactListUseCaseTest {
     }
 
     @Test
-    fun `fetch factlist from remote data source`() = coroutinesTestRule.runBlockingTest {
+    fun `fetch factlist from remote data source`() = runBlockingTest {
         val output = getFakeManipulatedRemoteDataList()
 
         coEvery {
@@ -75,18 +62,17 @@ class FactListUseCaseTest {
     }
 
     @Test
-    fun `failed to load data, as internet is not available`() =
-        coroutinesTestRule.runBlockingTest {
+    fun `failed to load data, as internet is not available`() = runBlockingTest {
 
-            val output = "No internet connection detected."
+        val output = "No internet connection detected."
 
-            coEvery {
-                factListRepository.getFactListRepository()
-            } returns flowOf(AppError(message = output))
+        coEvery {
+            factListRepository.getFactListRepository()
+        } returns flowOf(AppError(message = output))
 
-            val result = factListUseCase().single()
+        val result = factListUseCase().single()
 
-            Truth.assertThat(result).isInstanceOf(AppError::class.java)
-            Truth.assertThat((result as AppError).message).isEqualTo(output)
-        }
+        Truth.assertThat(result).isInstanceOf(AppError::class.java)
+        Truth.assertThat((result as AppError).message).isEqualTo(output)
+    }
 }

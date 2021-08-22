@@ -4,6 +4,7 @@ plugins {
     kotlin(Libs.Plugins.kotlinKapt)
     id(Libs.Plugins.kotlinNavigation)
     id(Libs.Plugins.kaptDagger)
+    id(Libs.TestDependencies.Junit5.plugin)
 }
 
 kapt {
@@ -12,11 +13,11 @@ kapt {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
 
         multiDexEnabled = true
 
@@ -24,7 +25,7 @@ android {
             file("proguard-rules.pro")
         )
 
-        resConfigs(AndroidSdk.locales)
+        resourceConfigurations.add(AndroidSdk.localesEnglish)
         testInstrumentationRunner = "reprator.wipro.factlist.FactListTestRunner"
     }
 
@@ -55,8 +56,8 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/atomicfu.kotlin_module")
-        exclude("META-INF/*")
+        jniLibs.excludes.add("META-INF/atomicfu.kotlin_module")
+        jniLibs.excludes.add("META-INF/*")
     }
 
     testOptions {
@@ -103,12 +104,13 @@ dependencies {
     /*
     *  Unit Testing
     * */
+    testImplementation(Libs.TestDependencies.Junit5.platformSuite)
+    testImplementation(Libs.TestDependencies.Junit5.api)
+    testRuntimeOnly(Libs.TestDependencies.Junit5.runtime)
+
     testImplementation(Libs.TestDependencies.AndroidXTest.truth)
     testImplementation(Libs.TestDependencies.core)
     testImplementation(Libs.OkHttp.mockWebServer)
-    testImplementation(Libs.TestDependencies.jUnit)
-    testImplementation(Libs.TestDependencies.AndroidXTest.rules)
-    testImplementation(Libs.TestDependencies.AndroidXTest.runner)
     testImplementation(Libs.TestDependencies.Mockk.unitTest)
 
     testImplementation(Libs.Coroutines.coroutineTest) {
@@ -143,5 +145,12 @@ dependencies {
 
     androidTestImplementation(Libs.Coroutines.coroutineTest) {
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-debug")
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
     }
 }

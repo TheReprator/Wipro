@@ -16,30 +16,19 @@
 
 package reprator.wipro.factlist.datasource.remote.remotemapper
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import io.mockk.MockKAnnotations
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.spyk
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.TestFakeData.getFakeRemoteDataList
+import reprator.wipro.factlist.util.InstantExecutorExtension
 
-@RunWith(JUnit4::class)
+@ExtendWith(InstantExecutorExtension::class)
 class FactListMapperTest {
-
-    @Rule
-    @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
-    @Before
-    fun setUp() = MockKAnnotations.init(this)
 
     @Test
     fun `create the parsed json fact into FactModals class with title`() = runBlockingTest {

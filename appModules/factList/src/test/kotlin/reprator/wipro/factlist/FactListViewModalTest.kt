@@ -16,43 +16,31 @@
 
 package reprator.wipro.factlist
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.google.common.truth.Truth
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.every
+import io.mockk.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import io.mockk.slot
-import io.mockk.verifySequence
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.RegisterExtension
 import reprator.wipro.base.useCases.AppError
 import reprator.wipro.base.useCases.AppSuccess
 import reprator.wipro.base_android.util.event.Event
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
 import reprator.wipro.factlist.domain.usecase.FactListUseCase
 import reprator.wipro.factlist.modals.FactModals
+import reprator.wipro.factlist.util.InstantExecutorExtension
 import reprator.wipro.factlist.util.MainCoroutineRule
 import reprator.wipro.factlist.util.onChangeExtension
 
-@ExperimentalCoroutinesApi
-@RunWith(JUnit4::class)
+@ExtendWith(value = [InstantExecutorExtension::class])
 class FactListViewModalTest {
 
-    @Rule
     @JvmField
-    val instantExecutorRule = InstantTaskExecutorRule()
-
-    @JvmField
-    @Rule
+    @RegisterExtension
     val coroutinesTestRule = MainCoroutineRule()
 
     @MockK
@@ -85,7 +73,7 @@ class FactListViewModalTest {
     val listRefreshError = arrayListOf<Event<String>>()
     val listRefreshLoader = arrayListOf<Boolean>()
 
-    @Before
+    @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
 

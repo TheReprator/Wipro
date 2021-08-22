@@ -3,7 +3,9 @@ object AndroidSdk {
     const val compile = 30
     const val target = compile
 
-    val locales = listOf("en", "hi")
+    val localesEnglish = "en"
+    val localesHindi = "hi"
+    //val locales = listOf("en", "hi")
 }
 
 object AppConstant {
@@ -192,6 +194,25 @@ object Libs {
     }
 
     object TestDependencies {
+        object Junit5 {
+            const val classPath = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
+            const val plugin = "de.mannodermaus.android-junit5"
+
+            private const val version = "5.8.0-RC1"
+
+            // (Required) Writing and executing Unit Tests on the JUnit Platform
+            const val api = "org.junit.jupiter:junit-jupiter-api:$version"
+            const val runtime = "org.junit.jupiter:junit-jupiter-engine:$version"
+
+            const val platformSuite = "org.junit.platform:junit-platform-suite:1.8.0-RC1"
+
+            // (Optional) If you need "Parameterized Tests"
+            const val parameterized = "org.junit.jupiter:junit-jupiter-params:$version"
+
+            // (Optional) If you also have JUnit 4-based tests
+            const val junit4Runtime = "org.junit.vintage:junit-vintage-engine:$version"
+        }
+
         object Mockk {
             private const val version = "1.10.5"
             const val unitTest = "io.mockk:mockk:$version"

@@ -12,13 +12,13 @@ kapt {
 }
 
 android {
-    compileSdk =AndroidSdk.compile
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
         applicationId = AppConstant.applicationPackage
 
-        minSdk =AndroidSdk.min
-        targetSdk =AndroidSdk.target
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
 
         versionCode = AppVersion.versionCode
         versionName = AppVersion.versionName

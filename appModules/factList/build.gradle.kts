@@ -104,8 +104,8 @@ dependencies {
     /*
     *  Unit Testing
     * */
-    testImplementation(Libs.TestDependencies.Junit5.platform)
-    testImplementation(Libs.TestDependencies.Junit5.jupiter)
+    testImplementation(Libs.TestDependencies.Junit5.platformSuite)
+    testImplementation(Libs.TestDependencies.Junit5.api)
     testRuntimeOnly(Libs.TestDependencies.Junit5.runtime)
 
     testImplementation(Libs.TestDependencies.AndroidXTest.truth)

@@ -198,12 +198,13 @@ object Libs {
             const val classPath = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
             const val plugin = "de.mannodermaus.android-junit5"
 
-            private const val version = "5.7.1"
+            private const val version = "5.8.0-RC1"
 
             // (Required) Writing and executing Unit Tests on the JUnit Platform
-            const val jupiter = "org.junit.jupiter:junit-jupiter-api:$version"
+            const val api = "org.junit.jupiter:junit-jupiter-api:$version"
             const val runtime = "org.junit.jupiter:junit-jupiter-engine:$version"
-            const val platform = "org.junit.platform:junit-platform-runner:1.7.2"
+
+            const val platformSuite = "org.junit.platform:junit-platform-suite:1.8.0-RC1"
 
             // (Optional) If you need "Parameterized Tests"
             const val parameterized = "org.junit.jupiter:junit-jupiter-params:$version"

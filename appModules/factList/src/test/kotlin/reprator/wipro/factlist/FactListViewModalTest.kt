@@ -37,7 +37,7 @@ import reprator.wipro.factlist.util.MainCoroutineRule
 import reprator.wipro.factlist.util.onChangeExtension
 
 @ExtendWith(value = [InstantExecutorExtension::class])
-public class FactListViewModalTest {
+class FactListViewModalTest {
 
     @JvmField
     @RegisterExtension

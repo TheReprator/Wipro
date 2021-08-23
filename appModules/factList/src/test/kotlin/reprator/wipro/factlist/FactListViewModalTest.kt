@@ -18,7 +18,12 @@ package reprator.wipro.factlist
 
 import androidx.lifecycle.Observer
 import com.google.common.truth.Truth
-import io.mockk.*
+import io.mockk.mockk
+import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.slot
+import io.mockk.MockKAnnotations
+import io.mockk.verifySequence
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import io.mockk.impl.annotations.MockK

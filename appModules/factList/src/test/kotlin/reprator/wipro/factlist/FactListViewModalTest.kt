@@ -18,17 +18,17 @@ package reprator.wipro.factlist
 
 import androidx.lifecycle.Observer
 import com.google.common.truth.Truth
-import io.mockk.mockk
-import io.mockk.every
-import io.mockk.coEvery
-import io.mockk.slot
 import io.mockk.MockKAnnotations
-import io.mockk.verifySequence
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.slot
+import io.mockk.verifySequence
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.RegisterExtension
 import reprator.wipro.base.useCases.AppError

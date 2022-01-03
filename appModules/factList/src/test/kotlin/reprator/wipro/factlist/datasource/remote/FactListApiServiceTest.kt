@@ -17,7 +17,7 @@
 package reprator.wipro.factlist.datasource.remote
 
 import com.google.common.truth.Truth
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterEach
@@ -76,7 +76,7 @@ class FactListApiServiceTest {
     }
 
     @Test
-    fun `get fact list successfully`() = runBlocking {
+    fun `get fact list successfully`() = runTest {
         mockWebServer.dispatcher = dispatcherWithCustomBody()
 
         val factListEntity =
@@ -99,7 +99,7 @@ class FactListApiServiceTest {
     }
 
     @Test
-    fun `get fact list request check`() = runBlocking {
+    fun `get fact list request check`() = runTest {
         mockWebServer.dispatcher = dispatcherWithCustomBody()
 
         service.factList().body()
@@ -118,7 +118,7 @@ class FactListApiServiceTest {
     }
 
     @Test
-    fun `Timeout example`(): Unit = runBlocking {
+    fun `Timeout example`(): Unit = runTest {
         mockWebServer.dispatcher = dispatcherWithErrorTimeOut()
 
         assertThrows<SocketTimeoutException> {

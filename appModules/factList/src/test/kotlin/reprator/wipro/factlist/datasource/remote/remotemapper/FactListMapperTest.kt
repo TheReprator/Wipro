@@ -20,7 +20,7 @@ import com.google.common.truth.Truth
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.spyk
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import reprator.wipro.factlist.TestFakeData.getFakeManipulatedRemoteDataList
@@ -31,7 +31,7 @@ import reprator.wipro.factlist.util.InstantExecutorExtension
 class FactListMapperTest {
 
     @Test
-    fun `create the parsed json fact into FactModals class with title`() = runBlockingTest {
+    fun `create the parsed json fact into FactModals class with title`() = runTest {
         val input = getFakeRemoteDataList()
         val output = getFakeManipulatedRemoteDataList()
 

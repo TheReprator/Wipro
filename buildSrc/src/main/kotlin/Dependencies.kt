@@ -33,7 +33,7 @@ object AppModules {
 object Libs {
 
     object Versions{
-        const val kotlin = "1.5.21"
+        const val kotlin = "1.6.0"
         const val spotless = "5.14.0"
         const val dokka = "1.4.32"
         const val ktlint = "0.40.0"
@@ -58,7 +58,7 @@ object Libs {
     }
 
     const val inject = "javax.inject:javax.inject:1"
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.4"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val facebook = "com.facebook.android:facebook-login:6.1.0"
     const val countryPicker = "com.hbb20:ccp:2.3.8"
@@ -95,7 +95,7 @@ object Libs {
     }
 
     object Coroutines {
-        private const val version = "1.4.3"
+        private const val version = "1.6.0"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -195,16 +195,16 @@ object Libs {
 
     object TestDependencies {
         object Junit5 {
-            const val classPath = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
+            const val classPath = "de.mannodermaus.gradle.plugins:android-junit5:1.8.2.0"
             const val plugin = "de.mannodermaus.android-junit5"
 
-            private const val version = "5.8.0-RC1"
+            private const val version = "5.8.2"
 
             // (Required) Writing and executing Unit Tests on the JUnit Platform
             const val api = "org.junit.jupiter:junit-jupiter-api:$version"
             const val runtime = "org.junit.jupiter:junit-jupiter-engine:$version"
 
-            const val platformSuite = "org.junit.platform:junit-platform-suite:1.8.0-RC1"
+            const val platformSuite = "org.junit.platform:junit-platform-suite:1.8.2"
 
             // (Optional) If you need "Parameterized Tests"
             const val parameterized = "org.junit.jupiter:junit-jupiter-params:$version"
@@ -214,7 +214,7 @@ object Libs {
         }
 
         object Mockk {
-            private const val version = "1.10.5"
+            private const val version = "1.12.1"
             const val unitTest = "io.mockk:mockk:$version"
             const val instrumentedTest = "io.mockk:mockk-android:$version"
         }

@@ -26,7 +26,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verifySequence
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -131,7 +131,7 @@ class FactListViewModalTest {
     }
 
     @Test
-    fun `get factList successfully on launch`() = coroutinesTestRule.runBlockingTest {
+    fun `get factList successfully on launch`() = runTest{
 
         val output = getFakeManipulatedRemoteDataList()
 
@@ -158,7 +158,7 @@ class FactListViewModalTest {
     }
 
     @Test
-    fun `get factList fetch failed on launch`() = coroutinesTestRule.runBlockingTest {
+    fun `get factList fetch failed on launch`() = runTest{
 
         val output = "An error occurred"
 
@@ -189,7 +189,7 @@ class FactListViewModalTest {
 
     @Test
     fun `retry, getFactlist successfully`() =
-        coroutinesTestRule.runBlockingTest {
+        runTest {
 
             val output = getFakeManipulatedRemoteDataList()
 
@@ -225,7 +225,7 @@ class FactListViewModalTest {
 
     @Test
     fun `onRefresh, getlist successfully`() =
-        coroutinesTestRule.runBlockingTest {
+        runTest{
 
             val output = getFakeManipulatedRemoteDataList()
 

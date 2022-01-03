@@ -22,7 +22,7 @@ import io.mockk.coEvery
 import io.mockk.coVerifySequence
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -60,7 +60,7 @@ class FactListRemoteDataSourceImplTest {
     }
 
     @Test
-    fun `fetch list successfully from server and map it to UI pojo`() = runBlockingTest {
+    fun `fetch list successfully from server and map it to UI pojo`() = runTest {
 
         val output = getFakeManipulatedRemoteDataList()
         coEvery {
@@ -86,7 +86,7 @@ class FactListRemoteDataSourceImplTest {
     }
 
     @Test
-    fun `fetch list failed with errorBody`() = runBlockingTest {
+    fun `fetch list failed with errorBody`() = runTest {
 
         coEvery {
             factListApiService.factList()

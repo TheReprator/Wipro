@@ -22,7 +22,7 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.single
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -48,7 +48,7 @@ class FactListUseCaseTest {
     }
 
     @Test
-    fun `fetch factlist from remote data source`() = runBlockingTest {
+    fun `fetch factlist from remote data source`() = runTest {
         val output = getFakeManipulatedRemoteDataList()
 
         coEvery {
@@ -62,7 +62,7 @@ class FactListUseCaseTest {
     }
 
     @Test
-    fun `failed to load data, as internet is not available`() = runBlockingTest {
+    fun `failed to load data, as internet is not available`() = runTest {
 
         val output = "No internet connection detected."
 

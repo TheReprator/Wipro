@@ -129,11 +129,6 @@ dependencies {
     kaptAndroidTest(Libs.DaggerHilt.hiltCompilerAndroid)
 
     androidTestImplementation(Libs.TestDependencies.AndroidXTest.junit)
-    androidTestImplementation(Libs.TestDependencies.Espresso.core)
-    androidTestImplementation(Libs.TestDependencies.Espresso.contrib)
-
-    androidTestImplementation(Libs.TestDependencies.Mockk.instrumentedTest)
-    androidTestImplementation(Libs.TestDependencies.UITest.dexmaker)
 
     androidTestImplementation(Libs.TestDependencies.UITest.kaspresso)
 
